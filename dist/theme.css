@@ -4,7 +4,7 @@
 @source "./index.js";
 
 /*
- * brake-ui theme.
+ * broke-ui theme.
  *
  * Components carry no `dark:` classes — dark mode is a variable swap driven by
  * `[data-theme="dark"]` on any ancestor. Set that attribute to switch themes.

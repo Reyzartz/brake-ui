@@ -16,5 +16,5 @@ if (existsSync(resolve(root, "dist/index.js"))) {
 try {
   execSync("npm run build", { cwd: root, stdio: "inherit" });
 } catch {
-  console.warn("brake-ui: prepare build skipped (toolchain unavailable)");
+  console.warn("broke-ui: prepare build skipped (toolchain unavailable)");
 }

@@ -1,4 +1,4 @@
-# brake-ui
+# broke-ui
 
 Sharp, clean React components. Built on React 19, Tailwind CSS v4 and
 `class-variance-authority`, with an `oklch` token system and attribute-driven
@@ -12,8 +12,8 @@ Distributed as a git dependency — no registry involved. `dist/` is committed, 
 no build step runs on install.
 
 ```sh
-bun add github:Reyzartz/brake-ui#v0.1.0
-# or: npm i github:Reyzartz/brake-ui#v0.1.0
+bun add github:Reyzartz/broke-ui#v0.1.0
+# or: npm i github:Reyzartz/broke-ui#v0.1.0
 ```
 
 Peer dependencies you must already have: `react`, `react-dom`, `lucide-react`.
@@ -22,9 +22,9 @@ Peer dependencies you must already have: `react`, `react-dom`, `lucide-react`.
 
 ```tsx
 // Once, at your app entry (or in your Tailwind entry CSS):
-import "brake-ui/theme.css";
+import "broke-ui/theme.css";
 
-import { Button, Card, Text } from "brake-ui";
+import { Button, Card, Text } from "broke-ui";
 
 <Card variant="selected" hover>
   <Text variant="h3">Hello</Text>
