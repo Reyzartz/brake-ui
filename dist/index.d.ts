@@ -1,3 +1,5 @@
+export { AccordionGroup, Accordion, AccordionTrigger, AccordionContent, } from "./Accordion";
+export type { AccordionGroupProps, AccordionProps, AccordionTriggerProps, AccordionContentProps, } from "./Accordion";
 export { Alert } from "./Alert";
 export type { AlertProps, AlertVariant } from "./Alert";
 export { Badge } from "./Badge";
@@ -24,6 +26,8 @@ export { Modal, ModalHeader, ModalBody, ModalFooter } from "./Modal";
 export type { ModalProps, ModalHeaderProps, ModalBodyProps, ModalFooterProps, } from "./Modal";
 export { Select } from "./Select";
 export type { SelectProps, SelectSize } from "./Select";
+export { TabGroup, TabList, Tab, TabPanel } from "./Tab";
+export type { TabGroupProps, TabListProps, TabProps, TabPanelProps, } from "./Tab";
 export { Text } from "./Text";
 export type { TextProps, TextVariant, TextColor } from "./Text";
 export { Textarea } from "./Textarea";
