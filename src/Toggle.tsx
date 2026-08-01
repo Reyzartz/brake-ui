@@ -14,7 +14,7 @@ export interface ToggleProps extends Omit<
 }
 
 const trackSizeClasses: Record<ToggleSize, string> = {
-  sm: "w-8 h-4",
+  sm: "w-8 h-4.5",
   md: "w-10 h-6",
   lg: "w-12 h-7",
 };
