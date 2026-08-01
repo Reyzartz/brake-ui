@@ -1,3 +1,16 @@
+export {
+  AccordionGroup,
+  Accordion,
+  AccordionTrigger,
+  AccordionContent,
+} from "./Accordion";
+export type {
+  AccordionGroupProps,
+  AccordionProps,
+  AccordionTriggerProps,
+  AccordionContentProps,
+} from "./Accordion";
+
 export { Alert } from "./Alert";
 export type { AlertProps, AlertVariant } from "./Alert";
 
