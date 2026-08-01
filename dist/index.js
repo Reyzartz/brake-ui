@@ -1,10 +1,10 @@
-import { jsx as e, jsxs as d, Fragment as C } from "react/jsx-runtime";
-import { clsx as l } from "clsx";
-import { Info as I, AlertTriangle as S, XCircle as P, CheckCircle as L, X as B, ChevronDownIcon as M } from "lucide-react";
-import { cva as h } from "class-variance-authority";
-import { forwardRef as N, memo as j, useState as v, useEffect as A } from "react";
-import { usePopper as V } from "react-popper";
-const T = h("shrink-0", {
+import { jsx as t, jsxs as m, Fragment as E } from "react/jsx-runtime";
+import { useId as O, useState as h, useContext as C, createContext as I, forwardRef as w, memo as j, useEffect as H } from "react";
+import { clsx as c } from "clsx";
+import { ChevronDown as R, Info as T, AlertTriangle as K, XCircle as q, CheckCircle as W, X as F, ChevronDownIcon as U } from "lucide-react";
+import { cva as N } from "class-variance-authority";
+import { usePopper as P } from "react-popper";
+const X = N("shrink-0", {
   variants: {
     size: {
       xs: "h-3 w-3",
@@ -27,22 +27,167 @@ const T = h("shrink-0", {
     size: "md",
     color: "default"
   }
-}), y = ({
-  icon: r,
-  size: t = "md",
-  color: s = "default",
+}), v = ({
+  icon: e,
+  size: s = "md",
+  color: r = "default",
   className: a,
   filled: o = !1
 }) => {
-  const n = l(T({ size: t, color: s }), a);
-  return /* @__PURE__ */ e(
-    r,
+  const n = c(X({ size: s, color: r }), a);
+  return /* @__PURE__ */ t(
+    e,
     {
       className: n,
       fill: o ? "currentColor" : "none"
     }
   );
-}, H = h("rounded px-3 py-2 text-xs border", {
+}, _ = N("", {
+  variants: {
+    variant: {
+      h1: "text-2xl font-bold",
+      h2: "text-lg font-semibold",
+      h3: "text-base font-semibold",
+      h4: "text-sm font-medium",
+      h5: "text-xs font-medium",
+      body: "text-sm",
+      small: "text-xs",
+      xs: "text-[10px]",
+      caption: "text-xs uppercase tracking-wide"
+    },
+    color: {
+      default: "text-text",
+      info: "text-info-text",
+      inverse: "text-text-inverse",
+      muted: "text-text-muted",
+      success: "text-success-text",
+      error: "text-error-text",
+      warning: "text-warning-text"
+    }
+  },
+  defaultVariants: {
+    variant: "body",
+    color: "default"
+  }
+}), x = ({
+  variant: e = "body",
+  color: s = "default",
+  children: r,
+  as: a,
+  className: o,
+  ...n
+}) => {
+  const l = a || (e === "h1" || e === "h2" || e === "h3" ? e : "p"), i = c(_({ variant: e, color: s }), o);
+  return /* @__PURE__ */ t(l, { className: i, ...n, children: r });
+}, S = I(
+  null
+), Z = () => {
+  const e = C(S);
+  if (!e)
+    throw new Error("Accordion must be used within an AccordionGroup");
+  return e;
+}, Oe = ({
+  children: e,
+  allowMultiple: s = !1,
+  defaultOpenIds: r = [],
+  openIds: a,
+  onOpenIdsChange: o,
+  className: n
+}) => {
+  const [l, i] = h(r), d = a !== void 0, u = d ? a : l, b = (p) => {
+    const f = u.includes(p), g = s ? f ? u.filter((y) => y !== p) : [...u, p] : f ? [] : [p];
+    d || i(g), o?.(g);
+  };
+  return /* @__PURE__ */ t(S.Provider, { value: { openIds: u, toggle: b }, children: /* @__PURE__ */ t(
+    "div",
+    {
+      className: c(
+        "bg-surface divide-border divide-y rounded border",
+        n
+      ),
+      children: e
+    }
+  ) });
+}, L = I(null), $ = () => {
+  const e = C(L);
+  if (!e)
+    throw new Error(
+      "AccordionTrigger/AccordionContent must be used within an Accordion"
+    );
+  return e;
+}, Te = ({
+  id: e,
+  children: s,
+  disabled: r = !1,
+  className: a,
+  ...o
+}) => {
+  const { openIds: n, toggle: l } = Z(), i = O(), d = n.includes(e), u = () => {
+    r || l(e);
+  };
+  return /* @__PURE__ */ t(L.Provider, { value: { isOpen: d, toggle: u, disabled: r, contentId: i }, children: /* @__PURE__ */ t("div", { className: a, ...o, children: s }) });
+}, Pe = ({
+  children: e,
+  icon: s,
+  className: r,
+  ...a
+}) => {
+  const { isOpen: o, toggle: n, disabled: l, contentId: i } = $();
+  return /* @__PURE__ */ m(
+    "button",
+    {
+      type: "button",
+      onClick: n,
+      disabled: l,
+      "aria-expanded": o,
+      "aria-controls": i,
+      className: c(
+        "flex w-full items-center gap-2 px-3 py-2.5 text-left transition-colors",
+        l ? "cursor-not-allowed opacity-60" : "hover:bg-surface-hover cursor-pointer",
+        r
+      ),
+      ...a,
+      children: [
+        s && /* @__PURE__ */ t(v, { icon: s, size: "sm", color: "muted" }),
+        typeof e == "string" ? /* @__PURE__ */ t(x, { variant: "h4", className: "flex-1", children: e }) : /* @__PURE__ */ t("div", { className: "flex-1", children: e }),
+        /* @__PURE__ */ t(
+          v,
+          {
+            icon: R,
+            size: "sm",
+            color: "muted",
+            className: c("transition-transform", o && "rotate-180")
+          }
+        )
+      ]
+    }
+  );
+}, Se = ({
+  children: e,
+  className: s,
+  ...r
+}) => {
+  const { isOpen: a, contentId: o } = $();
+  return /* @__PURE__ */ t(
+    "div",
+    {
+      id: o,
+      role: "region",
+      className: c(
+        "grid transition-[grid-template-rows] duration-200 ease-in-out",
+        a ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+      ),
+      children: /* @__PURE__ */ t("div", { className: "overflow-hidden", children: /* @__PURE__ */ t(
+        "div",
+        {
+          className: c("text-text-secondary px-3 pb-3 text-sm", s),
+          ...r,
+          children: e
+        }
+      ) })
+    }
+  );
+}, J = N("rounded px-3 py-2 text-xs border", {
   variants: {
     variant: {
       success: "bg-success-bg text-success-text border-success-border",
@@ -54,32 +199,32 @@ const T = h("shrink-0", {
   defaultVariants: {
     variant: "info"
   }
-}), D = {
-  success: L,
-  error: P,
-  warning: S,
-  info: I
-}, he = ({
-  variant: r = "info",
-  children: t,
-  showIcon: s = !0,
+}), Q = {
+  success: W,
+  error: q,
+  warning: K,
+  info: T
+}, Le = ({
+  variant: e = "info",
+  children: s,
+  showIcon: r = !0,
   className: a,
   ...o
-}) => /* @__PURE__ */ e(
+}) => /* @__PURE__ */ t(
   "div",
   {
-    className: l(
+    className: c(
       "rounded px-3 py-2 text-xs",
-      H({ variant: r }),
+      J({ variant: e }),
       a
     ),
     ...o,
-    children: s ? /* @__PURE__ */ d("div", { className: "flex items-center gap-2", children: [
-      /* @__PURE__ */ e(y, { icon: D[r], size: "sm", color: r }),
-      /* @__PURE__ */ e("span", { children: t })
-    ] }) : t
+    children: r ? /* @__PURE__ */ m("div", { className: "flex items-center gap-2", children: [
+      /* @__PURE__ */ t(v, { icon: Q[e], size: "sm", color: e }),
+      /* @__PURE__ */ t("span", { children: s })
+    ] }) : s
   }
-), R = h(
+), Y = N(
   "inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium shrink-0",
   {
     variants: {
@@ -95,15 +240,15 @@ const T = h("shrink-0", {
       variant: "default"
     }
   }
-), ve = ({
-  variant: r = "default",
-  children: t,
-  className: s,
+), $e = ({
+  variant: e = "default",
+  children: s,
+  className: r,
   ...a
 }) => {
-  const o = l(R({ variant: r }), s);
-  return /* @__PURE__ */ e("span", { className: o, ...a, children: t });
-}, W = h(
+  const o = c(Y({ variant: e }), r);
+  return /* @__PURE__ */ t("span", { className: o, ...a, children: s });
+}, ee = N(
   "cursor-pointer rounded font-medium transition-all inline-flex items-center justify-center gap-1.5 whitespace-nowrap disabled:cursor-not-allowed disabled:opacity-60 border",
   {
     variants: {
@@ -234,55 +379,55 @@ const T = h("shrink-0", {
       iconOnly: !1
     }
   }
-), k = {
+), A = {
   sm: 14,
   md: 16,
   lg: 18
-}, w = N(
+}, k = w(
   ({
-    variant: r = "filled",
-    color: t = "primary",
-    size: s = "md",
+    variant: e = "filled",
+    color: s = "primary",
+    size: r = "md",
     fullWidth: a = !1,
     icon: o,
     iconFilled: n = !1,
-    iconPosition: c = "left",
+    iconPosition: l = "left",
     className: i,
-    disabled: m,
-    children: f,
+    disabled: d,
+    children: u,
     ...b
   }, p) => {
-    const u = l(
-      W({
-        variant: r,
-        color: t,
-        size: s,
+    const f = c(
+      ee({
+        variant: e,
+        color: s,
+        size: r,
         fullWidth: a,
-        iconOnly: o && !f
+        iconOnly: o && !u
       }),
       i
     );
-    return /* @__PURE__ */ d("button", { ref: p, className: u, disabled: m, ...b, children: [
-      o && c === "left" && /* @__PURE__ */ e(
+    return /* @__PURE__ */ m("button", { ref: p, className: f, disabled: d, ...b, children: [
+      o && l === "left" && /* @__PURE__ */ t(
         o,
         {
-          size: k[s],
+          size: A[r],
           fill: n ? "currentColor" : "none"
         }
       ),
-      f,
-      o && c === "right" && /* @__PURE__ */ e(
+      u,
+      o && l === "right" && /* @__PURE__ */ t(
         o,
         {
-          size: k[s],
+          size: A[r],
           fill: n ? "currentColor" : "none"
         }
       )
     ] });
   }
 );
-w.displayName = "Button";
-const $ = h("rounded transition-colors list-none border", {
+k.displayName = "Button";
+const re = N("rounded transition-colors list-none border", {
   variants: {
     variant: {
       default: "bg-surface",
@@ -339,121 +484,84 @@ const $ = h("rounded transition-colors list-none border", {
     hover: !1,
     clickable: !1
   }
-}), q = N(
+}), te = w(
   ({
-    children: r,
-    variant: t = "default",
-    size: s = "md",
+    children: e,
+    variant: s = "default",
+    size: r = "md",
     hover: a = !1,
     clickable: o = !1,
     as: n = "div",
-    autoScroll: c = !1,
+    autoScroll: l = !1,
     disabled: i = !1,
-    onClick: m,
-    className: f,
+    onClick: d,
+    className: u,
     ...b
   }, p) => {
-    const u = l(
-      $({
-        variant: t,
-        size: s,
-        hover: a || !!m,
-        clickable: o || !!m,
+    const f = c(
+      re({
+        variant: s,
+        size: r,
+        hover: a || !!d,
+        clickable: o || !!d,
         disabled: i
       }),
-      f
+      u
     );
-    return /* @__PURE__ */ e(
+    return /* @__PURE__ */ t(
       n,
       {
         ref: (g) => {
-          c && g && (t === "success" || t === "selected") && g.scrollIntoView({
+          l && g && (s === "success" || s === "selected") && g.scrollIntoView({
             block: "nearest",
             behavior: "smooth"
           }), typeof p == "function" ? p(g) : p && (p.current = g);
         },
-        className: u,
-        onClick: i ? void 0 : m,
+        className: f,
+        onClick: i ? void 0 : d,
         ...b,
-        children: r
+        children: e
       }
     );
   }
 );
-q.displayName = "Card";
-const F = h("", {
-  variants: {
-    variant: {
-      h1: "text-2xl font-bold",
-      h2: "text-lg font-semibold",
-      h3: "text-base font-semibold",
-      h4: "text-sm font-medium",
-      h5: "text-xs font-medium",
-      body: "text-sm",
-      small: "text-xs",
-      xs: "text-[10px]",
-      caption: "text-xs uppercase tracking-wide"
-    },
-    color: {
-      default: "text-text",
-      info: "text-info-text",
-      inverse: "text-text-inverse",
-      muted: "text-text-muted",
-      success: "text-success-text",
-      error: "text-error-text",
-      warning: "text-warning-text"
-    }
-  },
-  defaultVariants: {
-    variant: "body",
-    color: "default"
-  }
-}), x = ({
-  variant: r = "body",
-  color: t = "default",
-  children: s,
-  as: a,
-  className: o,
-  ...n
-}) => {
-  const c = a || (r === "h1" || r === "h2" || r === "h3" ? r : "p"), i = l(F({ variant: r, color: t }), o);
-  return /* @__PURE__ */ e(c, { className: i, ...n, children: s });
-}, X = {
+te.displayName = "Card";
+const se = {
   sm: "max-w-xs",
   md: "max-w-sm",
   lg: "max-w-md",
   xl: "max-w-lg"
-}, _ = ({
-  isOpen: r,
-  onClose: t,
-  children: s,
+}, ae = ({
+  isOpen: e,
+  onClose: s,
+  children: r,
   maxWidth: a = "md",
   zIndex: o = 99999,
   className: n,
-  ...c
-}) => r ? /* @__PURE__ */ e(
+  ...l
+}) => e ? /* @__PURE__ */ t(
   "div",
   {
     className: "fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm",
     style: { zIndex: o },
-    onClick: t,
-    ...c,
-    children: /* @__PURE__ */ d(
+    onClick: s,
+    ...l,
+    children: /* @__PURE__ */ m(
       "div",
       {
-        className: l(
+        className: c(
           "bg-surface relative mx-3 w-full overflow-hidden rounded-lg shadow-xl",
-          X[a],
+          se[a],
           n
         ),
         onClick: (i) => i.stopPropagation(),
         children: [
-          t && /* @__PURE__ */ e(
-            w,
+          s && /* @__PURE__ */ t(
+            k,
             {
-              icon: B,
-              onClick: t,
-              className: l(
+              icon: F,
+              onClick: s,
+              className: c(
                 "absolute",
                 a === "sm" ? "top-2 right-2" : "top-1.5 right-1.5"
               ),
@@ -462,88 +570,88 @@ const F = h("", {
               color: "secondary"
             }
           ),
-          s
+          r
         ]
       }
     )
   }
-) : null, K = ({
-  children: r,
-  className: t,
-  title: s,
+) : null, oe = ({
+  children: e,
+  className: s,
+  title: r,
   icon: a,
   ...o
-}) => /* @__PURE__ */ d("div", { className: l("p-3", t), ...o, children: [
-  /* @__PURE__ */ d("div", { className: "flex items-center gap-2 empty:hidden", children: [
-    a && /* @__PURE__ */ e(y, { icon: a }),
-    s && /* @__PURE__ */ e(x, { variant: "h3", children: s })
+}) => /* @__PURE__ */ m("div", { className: c("p-3", s), ...o, children: [
+  /* @__PURE__ */ m("div", { className: "flex items-center gap-2 empty:hidden", children: [
+    a && /* @__PURE__ */ t(v, { icon: a }),
+    r && /* @__PURE__ */ t(x, { variant: "h3", children: r })
   ] }),
-  r
-] }), Z = ({
-  children: r,
-  className: t,
-  borderless: s = !1,
+  e
+] }), ne = ({
+  children: e,
+  className: s,
+  borderless: r = !1,
   ...a
-}) => /* @__PURE__ */ e(
+}) => /* @__PURE__ */ t(
   "div",
   {
-    className: l(
+    className: c(
       "overflow-auto px-3 py-3",
-      s ? "pt-0" : "border-y",
-      t
+      r ? "pt-0" : "border-y",
+      s
     ),
     style: { maxHeight: "70vh" },
     ...a,
-    children: r
+    children: e
   }
-), G = ({
-  children: r,
-  className: t,
-  visible: s = !0,
+), le = ({
+  children: e,
+  className: s,
+  visible: r = !0,
   ...a
-}) => /* @__PURE__ */ e(
+}) => /* @__PURE__ */ t(
   "div",
   {
-    className: l(
+    className: c(
       "bg-background-secondary flex justify-end gap-2 overflow-hidden px-2 transition-[max-height,opacity,padding] duration-200",
-      t,
-      s ? "max-h-14 py-2 opacity-100" : "max-h-0 py-0 opacity-0"
+      s,
+      r ? "max-h-14 py-2 opacity-100" : "max-h-0 py-0 opacity-0"
     ),
     ...a,
-    children: r
+    children: e
   }
-), J = j(
+), ce = j(
   ({
-    title: r,
-    message: t,
-    confirmText: s = "Confirm",
+    title: e,
+    message: s,
+    confirmText: r = "Confirm",
     cancelText: a = "Cancel",
     onClick: o,
     onCancel: n,
-    onConfirm: c,
+    onConfirm: l,
     isDestructiveAction: i,
-    ...m
+    ...d
   }) => {
-    const [f, b] = v(!1), p = () => {
+    const [u, b] = h(!1), p = () => {
       o?.(), b(!0);
-    }, u = () => {
+    }, f = () => {
       b(!1), n?.();
     }, g = () => {
-      c(), b(!1);
+      l(), b(!1);
     };
-    return /* @__PURE__ */ d(C, { children: [
-      /* @__PURE__ */ e(w, { onClick: p, ...m }),
-      /* @__PURE__ */ d(_, { isOpen: f, maxWidth: "sm", children: [
-        /* @__PURE__ */ e(K, { title: r }),
-        /* @__PURE__ */ e(Z, { borderless: !0, children: /* @__PURE__ */ e(x, { variant: "body", color: "muted", children: t }) }),
-        /* @__PURE__ */ d(G, { className: "flex-end flex gap-2", children: [
-          /* @__PURE__ */ e(w, { onClick: u, color: "secondary", variant: "text", children: a }),
-          /* @__PURE__ */ e(
-            w,
+    return /* @__PURE__ */ m(E, { children: [
+      /* @__PURE__ */ t(k, { onClick: p, ...d }),
+      /* @__PURE__ */ m(ae, { isOpen: u, maxWidth: "sm", children: [
+        /* @__PURE__ */ t(oe, { title: e }),
+        /* @__PURE__ */ t(ne, { borderless: !0, children: /* @__PURE__ */ t(x, { variant: "body", color: "muted", children: s }) }),
+        /* @__PURE__ */ m(le, { className: "flex-end flex gap-2", children: [
+          /* @__PURE__ */ t(k, { onClick: f, color: "secondary", variant: "text", children: a }),
+          /* @__PURE__ */ t(
+            k,
             {
               onClick: g,
               color: i ? "danger" : "primary",
-              children: s
+              children: r
             }
           )
         ] })
@@ -551,85 +659,85 @@ const F = h("", {
     ] });
   }
 );
-J.displayName = "ConfirmActionButton";
-const Q = {
+ce.displayName = "ConfirmActionButton";
+const ie = {
   none: "",
   sm: "my-2",
   md: "my-4",
   lg: "my-6"
-}, ye = ({
-  orientation: r = "horizontal",
-  spacing: t = "none",
-  className: s,
+}, Ge = ({
+  orientation: e = "horizontal",
+  spacing: s = "none",
+  className: r,
   ...a
-}) => r === "vertical" ? /* @__PURE__ */ e("div", { className: l("bg-border w-px", s), ...a }) : /* @__PURE__ */ e(
+}) => e === "vertical" ? /* @__PURE__ */ t("div", { className: c("bg-border w-px", r), ...a }) : /* @__PURE__ */ t(
   "hr",
   {
-    className: l(
+    className: c(
       "border-border border-0 border-t",
-      Q[t],
-      s
+      ie[s],
+      r
     ),
     ...a
   }
-), Ne = ({ items: r, trigger: t }) => {
-  const [s, a] = v(!1), [o, n] = v(null), [c, i] = v(null), { styles: m, attributes: f } = V(o, c, {
+), De = ({ items: e, trigger: s }) => {
+  const [r, a] = h(!1), [o, n] = h(null), [l, i] = h(null), { styles: d, attributes: u } = P(o, l, {
     placement: "bottom-end",
     modifiers: [{ name: "offset", options: { offset: [0, 4] } }]
   });
-  A(() => {
-    if (!s) return;
-    const u = (g) => {
-      o && !o.contains(g.target) && c && !c.contains(g.target) && a(!1);
+  H(() => {
+    if (!r) return;
+    const f = (g) => {
+      o && !o.contains(g.target) && l && !l.contains(g.target) && a(!1);
     };
-    return document.addEventListener("mousedown", u), () => document.removeEventListener("mousedown", u);
-  }, [s, o, c]);
-  const b = (u) => {
-    u(), a(!1);
+    return document.addEventListener("mousedown", f), () => document.removeEventListener("mousedown", f);
+  }, [r, o, l]);
+  const b = (f) => {
+    f(), a(!1);
   };
-  return /* @__PURE__ */ d(C, { children: [
-    /* @__PURE__ */ e(
+  return /* @__PURE__ */ m(E, { children: [
+    /* @__PURE__ */ t(
       "div",
       {
         ref: n,
         className: "shrink-0",
-        onClick: (u) => {
-          u.stopPropagation(), a(!s);
+        onClick: (f) => {
+          f.stopPropagation(), a(!r);
         },
-        children: t
+        children: s
       }
     ),
-    /* @__PURE__ */ e(
+    /* @__PURE__ */ t(
       "div",
       {
         ref: i,
-        style: m.popper,
-        ...f.popper,
-        className: s ? "z-50" : "pointer-events-none invisible",
-        children: /* @__PURE__ */ e("div", { className: "bg-surface min-w-30 rounded shadow-lg", children: r.map((u, g) => {
-          const z = u.icon;
-          return /* @__PURE__ */ d(
+        style: d.popper,
+        ...u.popper,
+        className: r ? "z-50" : "pointer-events-none invisible",
+        children: /* @__PURE__ */ t("div", { className: "bg-surface min-w-30 rounded shadow-lg", children: e.map((f, g) => {
+          const y = f.icon;
+          return /* @__PURE__ */ m(
             "button",
             {
               className: "hover:bg-surface-hover flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm whitespace-pre first:rounded-t last:rounded-b",
-              onClick: (O) => {
-                O.stopPropagation(), b(u.onClick);
+              onClick: (z) => {
+                z.stopPropagation(), b(f.onClick);
               },
               children: [
-                z && /* @__PURE__ */ e(
-                  y,
+                y && /* @__PURE__ */ t(
+                  v,
                   {
-                    icon: z,
+                    icon: y,
                     size: "sm",
-                    color: u.variant === "danger" ? "error" : "default"
+                    color: f.variant === "danger" ? "error" : "default"
                   }
                 ),
-                /* @__PURE__ */ e(
+                /* @__PURE__ */ t(
                   x,
                   {
                     variant: "body",
-                    color: u.variant === "danger" ? "error" : "default",
-                    children: u.label
+                    color: f.variant === "danger" ? "error" : "default",
+                    children: f.label
                   }
                 )
               ]
@@ -640,46 +748,46 @@ const Q = {
       }
     )
   ] });
-}, E = ({ content: r }) => {
-  const [t, s] = v(!1), [a, o] = v(
+}, G = ({ content: e }) => {
+  const [s, r] = h(!1), [a, o] = h(
     null
-  ), [n, c] = v(null), [i, m] = v(null), { styles: f, attributes: b } = V(a, n, {
+  ), [n, l] = h(null), [i, d] = h(null), { styles: u, attributes: b } = P(a, n, {
     placement: "top",
     modifiers: [
       { name: "arrow", options: { element: i } },
       { name: "offset", options: { offset: [0, 10] } }
     ]
   });
-  return /* @__PURE__ */ d("span", { className: "inline-flex items-center", children: [
-    /* @__PURE__ */ e(
+  return /* @__PURE__ */ m("span", { className: "inline-flex items-center", children: [
+    /* @__PURE__ */ t(
       "button",
       {
         ref: o,
         type: "button",
-        onMouseEnter: () => s(!0),
-        onMouseLeave: () => s(!1),
-        onFocus: () => s(!0),
-        onBlur: () => s(!1),
+        onMouseEnter: () => r(!0),
+        onMouseLeave: () => r(!1),
+        onFocus: () => r(!0),
+        onBlur: () => r(!1),
         className: "text-text-muted hover:text-text inline-flex transition-colors",
         tabIndex: -1,
-        children: /* @__PURE__ */ e(I, { className: "h-3.5 w-3.5" })
+        children: /* @__PURE__ */ t(T, { className: "h-3.5 w-3.5" })
       }
     ),
-    /* @__PURE__ */ d(
+    /* @__PURE__ */ m(
       "div",
       {
-        ref: c,
-        style: f.popper,
+        ref: l,
+        style: u.popper,
         ...b.popper,
-        className: t ? "z-50" : "pointer-events-none invisible",
+        className: s ? "z-50" : "pointer-events-none invisible",
         children: [
-          /* @__PURE__ */ e("div", { className: "border-border bg-surface w-48 rounded-lg border px-2.5 py-2 shadow-lg", children: /* @__PURE__ */ e(x, { variant: "small", color: "muted", children: r }) }),
-          /* @__PURE__ */ e("div", { ref: m, style: f.arrow, className: "absolute", children: /* @__PURE__ */ e("div", { className: "border-border bg-surface h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r border-b" }) })
+          /* @__PURE__ */ t("div", { className: "border-border bg-surface w-48 rounded-lg border px-2.5 py-2 shadow-lg", children: /* @__PURE__ */ t(x, { variant: "small", color: "muted", children: e }) }),
+          /* @__PURE__ */ t("div", { ref: d, style: u.arrow, className: "absolute", children: /* @__PURE__ */ t("div", { className: "border-border bg-surface h-2.5 w-2.5 -translate-y-1/2 rotate-45 border-r border-b" }) })
         ]
       }
     )
   ] });
-}, U = h(
+}, de = N(
   "rounded text-text-secondary transition-all duration-200 border focus:outline-none disabled:cursor-not-allowed disabled:bg-surface-muted disabled:opacity-60  ring-inset",
   {
     variants: {
@@ -740,69 +848,69 @@ const Q = {
       hasIcon: !1
     }
   }
-), Y = {
+), ue = {
   sm: "sm",
   md: "sm",
   lg: "md"
-}, ee = {
+}, me = {
   sm: "left-2.5",
   md: "left-3",
   lg: "left-4"
-}, re = N(
+}, fe = w(
   ({
-    label: r,
-    info: t,
-    error: s,
+    label: e,
+    info: s,
+    error: r,
     fullWidth: a = !0,
     size: o = "md",
     className: n,
-    id: c,
+    id: l,
     icon: i,
-    ...m
-  }, f) => {
-    const b = c || r?.toLowerCase().replace(/\s+/g, "-");
-    return /* @__PURE__ */ d("div", { className: l(a && "w-full"), children: [
-      (r || t) && /* @__PURE__ */ d("div", { className: "mb-1 flex items-center gap-1", children: [
-        r && /* @__PURE__ */ e(x, { variant: "small", color: "muted", children: r }),
-        t && /* @__PURE__ */ e(E, { content: t })
+    ...d
+  }, u) => {
+    const b = l || e?.toLowerCase().replace(/\s+/g, "-");
+    return /* @__PURE__ */ m("div", { className: c(a && "w-full"), children: [
+      (e || s) && /* @__PURE__ */ m("div", { className: "mb-1 flex items-center gap-1", children: [
+        e && /* @__PURE__ */ t(x, { variant: "small", color: "muted", children: e }),
+        s && /* @__PURE__ */ t(G, { content: s })
       ] }),
-      /* @__PURE__ */ d("div", { className: "relative", children: [
-        i && /* @__PURE__ */ e(
-          y,
+      /* @__PURE__ */ m("div", { className: "relative", children: [
+        i && /* @__PURE__ */ t(
+          v,
           {
             icon: i,
-            size: Y[o],
+            size: ue[o],
             color: "muted",
-            className: l(
+            className: c(
               "pointer-events-none absolute top-1/2 -translate-y-1/2",
-              ee[o]
+              me[o]
             )
           }
         ),
-        /* @__PURE__ */ e(
+        /* @__PURE__ */ t(
           "input",
           {
-            ref: f,
+            ref: u,
             id: b,
-            className: l(
-              U({
+            className: c(
+              de({
                 size: o,
-                hasError: !!s,
+                hasError: !!r,
                 fullWidth: a,
                 hasIcon: !!i
               }),
               n
             ),
-            ...m
+            ...d
           }
         )
       ] }),
-      s && /* @__PURE__ */ e(x, { variant: "small", color: "error", className: "mt-1", children: s })
+      r && /* @__PURE__ */ t(x, { variant: "small", color: "error", className: "mt-1", children: r })
     ] });
   }
 );
-re.displayName = "Input";
-const se = h(
+fe.displayName = "Input";
+const be = N(
   "inline-flex items-center justify-center rounded-sm border border-border bg-surface font-mono font-medium text-text-muted shrink-0",
   {
     variants: {
@@ -821,20 +929,20 @@ const se = h(
       iconOnly: !1
     }
   }
-), te = {
+), pe = {
   sm: "xs",
   md: "sm",
   lg: "md"
-}, we = ({
-  size: r = "md",
-  icon: t,
-  children: s,
+}, Be = ({
+  size: e = "md",
+  icon: s,
+  children: r,
   className: a,
   ...o
 }) => {
-  const n = l(se({ size: r, iconOnly: !!t }), a);
-  return /* @__PURE__ */ e("kbd", { className: n, ...o, children: t ? /* @__PURE__ */ e(y, { icon: t, size: te[r], color: "muted" }) : s });
-}, ae = h(
+  const n = c(be({ size: e, iconOnly: !!s }), a);
+  return /* @__PURE__ */ t("kbd", { className: n, ...o, children: s ? /* @__PURE__ */ t(v, { icon: s, size: pe[e], color: "muted" }) : r });
+}, ge = N(
   "appearance-none rounded text-text-secondary transition-all focus:outline-none disabled:cursor-not-allowed border disabled:bg-surface-muted disabled:opacity-60 cursor-pointer",
   {
     variants: {
@@ -895,138 +1003,231 @@ const se = h(
       hasIcon: !1
     }
   }
-), oe = {
+), xe = {
   sm: "sm",
   md: "sm",
   lg: "md"
-}, ne = {
+}, he = {
   sm: "left-2.5",
   md: "left-3",
   lg: "left-4"
-}, le = N(
+}, ve = w(
   ({
-    label: r,
-    info: t,
-    error: s,
+    label: e,
+    info: s,
+    error: r,
     fullWidth: a = !0,
     size: o = "md",
     className: n,
-    id: c,
+    id: l,
     children: i,
-    icon: m,
-    ...f
+    icon: d,
+    ...u
   }, b) => {
-    const p = c || r?.toLowerCase().replace(/\s+/g, "-");
-    return /* @__PURE__ */ d("div", { className: l("relative", a && "w-full"), children: [
-      (r || t) && /* @__PURE__ */ d("div", { className: "mb-1 flex items-center gap-1", children: [
-        r && /* @__PURE__ */ e(x, { variant: "small", color: "muted", children: r }),
-        t && /* @__PURE__ */ e(E, { content: t })
+    const p = l || e?.toLowerCase().replace(/\s+/g, "-");
+    return /* @__PURE__ */ m("div", { className: c("relative", a && "w-full"), children: [
+      (e || s) && /* @__PURE__ */ m("div", { className: "mb-1 flex items-center gap-1", children: [
+        e && /* @__PURE__ */ t(x, { variant: "small", color: "muted", children: e }),
+        s && /* @__PURE__ */ t(G, { content: s })
       ] }),
-      /* @__PURE__ */ d("div", { className: "relative", children: [
-        m && /* @__PURE__ */ e(
-          y,
+      /* @__PURE__ */ m("div", { className: "relative", children: [
+        d && /* @__PURE__ */ t(
+          v,
           {
-            icon: m,
-            size: oe[o],
+            icon: d,
+            size: xe[o],
             color: "muted",
-            className: l(
+            className: c(
               "pointer-events-none absolute top-1/2 -translate-y-1/2",
-              ne[o]
+              he[o]
             )
           }
         ),
-        /* @__PURE__ */ e(
+        /* @__PURE__ */ t(
           "select",
           {
             ref: b,
             id: p,
-            className: l(
-              ae({
+            className: c(
+              ge({
                 size: o,
-                hasError: !!s,
+                hasError: !!r,
                 fullWidth: a,
-                hasIcon: !!m
+                hasIcon: !!d
               }),
               n
             ),
-            ...f,
+            ...u,
             children: i
           }
         ),
-        /* @__PURE__ */ e(
-          y,
+        /* @__PURE__ */ t(
+          v,
           {
-            icon: M,
+            icon: U,
             size: "sm",
             color: "muted",
             className: "pointer-events-none absolute top-1/2 right-3 -translate-y-1/2"
           }
         )
       ] }),
-      s && /* @__PURE__ */ e(x, { variant: "small", color: "error", className: "mt-1", children: s })
+      r && /* @__PURE__ */ t(x, { variant: "small", color: "error", className: "mt-1", children: r })
     ] });
   }
 );
-le.displayName = "Select";
-const ce = N(
+ve.displayName = "Select";
+const D = I(null), B = () => {
+  const e = C(D);
+  if (!e)
+    throw new Error("Tab/TabList/TabPanel must be used within a TabGroup");
+  return e;
+}, Me = ({
+  children: e,
+  defaultValue: s = "",
+  value: r,
+  onValueChange: a,
+  className: o
+}) => {
+  const [n, l] = h(s), i = O(), d = r !== void 0, u = d ? r : n, b = (p) => {
+    d || l(p), a?.(p);
+  };
+  return /* @__PURE__ */ t(D.Provider, { value: { value: u, setValue: b, idPrefix: i }, children: /* @__PURE__ */ t("div", { className: o, children: e }) });
+}, je = ({ children: e, className: s, ...r }) => /* @__PURE__ */ t(
+  "div",
+  {
+    role: "tablist",
+    className: c("border-border flex gap-1 border-b", s),
+    ...r,
+    children: e
+  }
+), He = ({
+  value: e,
+  children: s,
+  icon: r,
+  disabled: a = !1,
+  className: o,
+  ...n
+}) => {
+  const { value: l, setValue: i, idPrefix: d } = B(), u = l === e, b = `${d}-tab-${e}`, p = `${d}-panel-${e}`;
+  return /* @__PURE__ */ m(
+    "button",
+    {
+      type: "button",
+      id: b,
+      role: "tab",
+      onClick: () => i(e),
+      onKeyDown: (g) => {
+        if (g.key !== "ArrowRight" && g.key !== "ArrowLeft") return;
+        const y = Array.from(
+          g.currentTarget.closest('[role="tablist"]')?.querySelectorAll('[role="tab"]:not(:disabled)') ?? []
+        ), z = y.indexOf(g.currentTarget);
+        if (z === -1) return;
+        g.preventDefault();
+        const M = g.key === "ArrowRight" ? 1 : -1, V = y[(z + M + y.length) % y.length];
+        V?.focus(), V?.click();
+      },
+      disabled: a,
+      "aria-selected": u,
+      "aria-controls": p,
+      tabIndex: u ? 0 : -1,
+      className: c(
+        "-mb-px flex items-center gap-2 border-b-2 px-3 py-2 transition-colors",
+        a ? "cursor-not-allowed opacity-60" : "hover:border-border cursor-pointer",
+        u ? "border-primary" : "border-transparent",
+        o
+      ),
+      ...n,
+      children: [
+        r && /* @__PURE__ */ t(
+          v,
+          {
+            icon: r,
+            size: "sm",
+            color: u ? "default" : "muted"
+          }
+        ),
+        typeof s == "string" ? /* @__PURE__ */ t(x, { as: "span", variant: "h4", color: u ? "default" : "muted", children: s }) : s
+      ]
+    }
+  );
+}, Re = ({
+  value: e,
+  children: s,
+  className: r,
+  ...a
+}) => {
+  const { value: o, idPrefix: n } = B();
+  return o === e ? /* @__PURE__ */ t(
+    "div",
+    {
+      id: `${n}-panel-${e}`,
+      role: "tabpanel",
+      "aria-labelledby": `${n}-tab-${e}`,
+      tabIndex: 0,
+      className: c("text-text-secondary py-3 text-sm", r),
+      ...a,
+      children: s
+    }
+  ) : null;
+}, ye = w(
   ({
-    label: r,
-    error: t,
-    fullWidth: s = !0,
+    label: e,
+    error: s,
+    fullWidth: r = !0,
     className: a,
     containerClassName: o,
     id: n,
-    ...c
+    ...l
   }, i) => {
-    const m = n || r?.toLowerCase().replace(/\s+/g, "-");
-    return /* @__PURE__ */ d("div", { className: l(s && "w-full", o), children: [
-      r && /* @__PURE__ */ e(x, { variant: "small", color: "muted", className: "mb-1 block", children: r }),
-      /* @__PURE__ */ e(
+    const d = n || e?.toLowerCase().replace(/\s+/g, "-");
+    return /* @__PURE__ */ m("div", { className: c(r && "w-full", o), children: [
+      e && /* @__PURE__ */ t(x, { variant: "small", color: "muted", className: "mb-1 block", children: e }),
+      /* @__PURE__ */ t(
         "textarea",
         {
           ref: i,
-          id: m,
-          className: l(
+          id: d,
+          className: c(
             "bg-surface text-text-secondary resize-none rounded border px-3 py-2 text-sm transition-all",
             "focus:bg-surface-active ring-inset focus:ring-1 focus:outline-none",
             "disabled:bg-surface-muted disabled:cursor-not-allowed disabled:opacity-60",
-            t ? "bg-error-bg focus:ring-error border-error-border" : "focus:ring-primary border-border",
-            s && "w-full",
+            s ? "bg-error-bg focus:ring-error border-error-border" : "focus:ring-primary border-border",
+            r && "w-full",
             a
           ),
-          ...c
+          ...l
         }
       ),
-      t && typeof t == "string" && /* @__PURE__ */ e(x, { variant: "small", color: "error", className: "mt-1", children: t })
+      s && typeof s == "string" && /* @__PURE__ */ t(x, { variant: "small", color: "error", className: "mt-1", children: s })
     ] });
   }
 );
-ce.displayName = "Textarea";
-const ie = {
-  sm: "w-8 h-4",
+ye.displayName = "Textarea";
+const Ne = {
+  sm: "w-8 h-4.5",
   md: "w-10 h-6",
   lg: "w-12 h-7"
-}, de = {
+}, we = {
   sm: "w-3 h-3",
   md: "w-4 h-4",
   lg: "w-5 h-5"
-}, me = N(
-  ({ label: r, className: t, size: s = "md", fullWidth: a = !1, disabled: o, ...n }, c) => /* @__PURE__ */ d("label", { className: l("flex items-center gap-3", a && "w-full"), children: [
-    r && /* @__PURE__ */ e(x, { variant: "small", color: "muted", className: "block", children: r }),
-    /* @__PURE__ */ d(
+}, ke = w(
+  ({ label: e, className: s, size: r = "md", fullWidth: a = !1, disabled: o, ...n }, l) => /* @__PURE__ */ m("label", { className: c("flex items-center gap-3", a && "w-full"), children: [
+    e && /* @__PURE__ */ t(x, { variant: "small", color: "muted", className: "block", children: e }),
+    /* @__PURE__ */ m(
       "div",
       {
-        className: l(
+        className: c(
           "relative inline-flex items-center",
-          ie[s],
+          Ne[r],
           o ? "cursor-not-allowed opacity-60" : "cursor-pointer",
-          t
+          s
         ),
         children: [
-          /* @__PURE__ */ e(
+          /* @__PURE__ */ t(
             "input",
             {
-              ref: c,
+              ref: l,
               type: "checkbox",
               role: "switch",
               "aria-checked": n.checked,
@@ -1035,22 +1236,22 @@ const ie = {
               ...n
             }
           ),
-          /* @__PURE__ */ e(
+          /* @__PURE__ */ t(
             "span",
             {
-              className: l(
+              className: c(
                 "absolute inset-0 rounded-full transition-colors",
                 n.checked ? "bg-success" : "bg-surface-active"
               ),
               "aria-hidden": !0
             }
           ),
-          /* @__PURE__ */ e(
+          /* @__PURE__ */ t(
             "span",
             {
-              className: l(
+              className: c(
                 "absolute top-1/2 left-1 -translate-y-1/2 transform rounded-full bg-white shadow-sm transition-transform",
-                de[s],
+                we[r],
                 n.checked ? "translate-x-full" : "translate-x-0"
               ),
               "aria-hidden": !0
@@ -1061,26 +1262,34 @@ const ie = {
     )
   ] })
 );
-me.displayName = "Toggle";
+ke.displayName = "Toggle";
 export {
-  he as Alert,
-  ve as Badge,
-  w as Button,
-  q as Card,
-  J as ConfirmActionButton,
-  ye as Divider,
-  Ne as Dropdown,
-  y as Icon,
-  E as InfoPopover,
-  re as Input,
-  we as Kbd,
-  _ as Modal,
-  Z as ModalBody,
-  G as ModalFooter,
-  K as ModalHeader,
-  le as Select,
+  Te as Accordion,
+  Se as AccordionContent,
+  Oe as AccordionGroup,
+  Pe as AccordionTrigger,
+  Le as Alert,
+  $e as Badge,
+  k as Button,
+  te as Card,
+  ce as ConfirmActionButton,
+  Ge as Divider,
+  De as Dropdown,
+  v as Icon,
+  G as InfoPopover,
+  fe as Input,
+  Be as Kbd,
+  ae as Modal,
+  ne as ModalBody,
+  le as ModalFooter,
+  oe as ModalHeader,
+  ve as Select,
+  He as Tab,
+  Me as TabGroup,
+  je as TabList,
+  Re as TabPanel,
   x as Text,
-  ce as Textarea,
-  me as Toggle
+  ye as Textarea,
+  ke as Toggle
 };
 //# sourceMappingURL=index.js.map
