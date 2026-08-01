@@ -4,4 +4,4 @@ storybook-static
 .DS_Store
 
 # dist/ is intentionally NOT ignored — it is committed so that
-# `bun add github:Reyzartz/brake-ui#vX.Y.Z` works without a build step.
+# `bun add github:Reyzartz/broke-ui#vX.Y.Z` works without a build step.

@@ -2,7 +2,7 @@
 // `@source` directive.
 //
 // Tailwind v4 skips node_modules during automatic source detection, so a
-// consumer importing "brake-ui/theme.css" would otherwise get zero utility
+// consumer importing "broke-ui/theme.css" would otherwise get zero utility
 // classes for the markup inside our components. dist/theme.css sits next to
 // dist/index.js, so "./index.js" resolves correctly from any consumer with no
 // configuration on their side.
